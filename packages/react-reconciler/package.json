@@ -1,0 +1,11 @@
+{
+  "name": "@icanvas/react-reconciler",
+  "version": "1.0.0-beta",
+  "main": "src/index.js",
+  "module": "src/index.js",
+  "author": "闲人 <code@idler8.com>",
+  "license": "MIT",
+  "dependencies": {
+    "react-reconciler": "0.29.0"
+  }
+}

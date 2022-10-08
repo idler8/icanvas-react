@@ -1,14 +1,11 @@
 {
-  "name": "@icanvas/react",
-  "version": "1.0.0",
-  "main": "index.js",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "author": "闲人 <code@idler8.com>",
-  "license": "MIT",
   "devDependencies": {
     "eslint": "^8.25.0",
     "eslint-plugin-react": "^7.31.8"
-  },
-  "dependencies": {
-    "react": ">17.0.0"
   }
 }
