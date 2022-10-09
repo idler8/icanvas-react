@@ -1,8 +1,7 @@
 {
-  "name": "@icanvas/react-components",
+  "name": "@icanvas/react-hooks",
   "version": "1.0.0-beta",
-  "main": "libs/index.umd.js",
-  "module": "libs/index.es.js",
+  "main": "src/index.js",
   "author": "闲人 <code@idler8.com>",
   "license": "MIT",
   "dependencies": {

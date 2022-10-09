@@ -1,6 +1,6 @@
-import { Image } from '@icanvas/react-components';
+import { useImage } from '@icanvas/react-hooks';
 import useCanvasOptions from 'apiHooks/useCanvasOptions';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useTransition } from 'react';
 import explosion1 from './Resources/explosion1.png';
 import explosion2 from './Resources/explosion2.png';
 import explosion3 from './Resources/explosion3.png';
@@ -44,14 +44,16 @@ const textures = [
 export default function Component({ children }) {
   const { width } = useCanvasOptions();
   const [ texture, setTexture ] = useState(explosion1);
+  const [ , startTransition ] = useTransition();
   useEffect(() => {
     setInterval(() => {
-      setTexture((texture) => textures[textures.indexOf(texture) + 1]);
+      startTransition(() => setTexture((texture) => textures[textures.indexOf(texture) + 1]));
     }, 100);
   }, []);
+  const source = useImage(texture);
   return (
-    <Image x={width / 2 - 50} y={50} width={100} height={100} src={texture}>
+    <texture x={width / 2 - 50} y={50} width={100} height={100} source={source}>
       { children }
-    </Image>
+    </texture>
   );
 }

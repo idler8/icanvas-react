@@ -1,7 +1,6 @@
 import * as renderFunctions from './renderFunctions';
 function drawChildren(ctx) {
   this.children.forEach((child) => {
-    console.log('__child', child);
     ctx.save();
     child._drawTransform?.(ctx);
     child._drawElement?.(ctx);
@@ -11,7 +10,7 @@ function drawChildren(ctx) {
 }
 // eslint-disable-next-line no-unused-vars
 export default function createInstance(type, props, rootContainer, hostContext, internalHandle) {
-  console.log('createInstance', type, props, internalHandle);
+  console.log('createInstance');
   // TODO 设定监听
   return {
     type,

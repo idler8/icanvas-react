@@ -98,6 +98,5 @@ export function rect(ctx) {
 export function texture(ctx) {
   const props = getPropsAfterStyle(this, ctx);
   const { x = 0, y = 0, width, height, source } = transformPosition(props, ctx);
-  console.log('source?.src', source?.src);
   if (source) ctx.drawImage(source, x, y, width, height);
 }
