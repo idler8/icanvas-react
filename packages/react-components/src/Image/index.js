@@ -5,6 +5,7 @@ export default function Component({ src, ...props }) {
   useEffect(() => {
     const image = new Image();
     image.onload = () => {
+      console.log('imageLoad', src);
       setSource(image);
     };
     image.src = src;

@@ -4,6 +4,11 @@
     "packages/*"
   ],
   "author": "闲人 <code@idler8.com>",
+  "scripts": {
+    "components":"yarn workspace @icanvas/react-components run start",
+    "icanvas":"yarn workspace @icanvas/create-react-icanvas run start",
+    "start":"yarn components & yarn icanvas"
+  },
   "devDependencies": {
     "eslint": "^8.25.0",
     "eslint-plugin-react": "^7.31.8"

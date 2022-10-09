@@ -18,7 +18,8 @@ export function appendInitialChild(parentInstance, child) {
     // Noop for string children of Text (eg <Text>{'foo'}{'bar'}</Text>)
     throw new Error('Text children should already be flattened.');
   }
-  child.inject(parentInstance);
+  parentInstance.children.push(child);
+  child.parentNode = parentInstance;
 }
 // 完成节点初始化渲染之前
 export function finalizeInitialChildren(domElement, type, props) {
@@ -94,16 +95,13 @@ export function getCurrentEventPriority() {
 export function appendChild(parentInstance, child) {
   console.log('appendChild', parentInstance, child);
   if (typeof child === 'string' || typeof child === 'number') return;
-  if (child.parentNode === parentInstance) child.eject();
-  child.inject(parentInstance);
+  const brother = child.parentNode?.children;
+  if (brother) brother.splice(brother.indexOf(child), 1);
+  parentInstance.children.push(child);
+  child.parentNode = parentInstance;
 }
 // 添加元素到根节点
-export function appendChildToContainer(container, child) {
-  console.log('appendChildToContainer', container, child);
-  if (typeof child === 'string' || typeof child === 'number') return;
-  if (child.parentNode === container) child.eject();
-  child.inject(container);
-}
+export const appendChildToContainer = appendChild;
 // 添加元素到节点的某个子节点之前
 export function insertBefore(parentInstance, child, beforeChild) {
   console.log('insertBefore', parentInstance, child);
@@ -111,30 +109,24 @@ export function insertBefore(parentInstance, child, beforeChild) {
   if (child === beforeChild) {
     throw new Error('ReactART: Can not insert node before itself');
   }
-  child.injectBefore(beforeChild);
+  const brother = child.parentNode?.children;
+  if (brother) brother.splice(brother.indexOf(child), 1);
+  const newBrother = parentInstance.children;
+  const index = newBrother.indexOf(beforeChild);
+  newBrother.splice(index, 0, child);
+  child.parentNode = parentInstance;
 }
 // 添加元素到根节点的某个子节点之前
-export function insertInContainerBefore(container, child, beforeChild) {
-  console.log('insertInContainerBefore', container, child);
-  if (typeof child === 'string' || typeof child === 'number') return;
-  if (child === beforeChild) {
-    throw new Error('ReactART: Can not insert node before itself');
-  }
-
-  child.injectBefore(beforeChild);
-}
+export const insertInContainerBefore = insertBefore;
 // 移除某个子节点
 export function removeChild(parentInstance, child) {
   console.log('removeChild', parentInstance, child);
   // TODO 移除事件
-  child.eject();
+  const brother = child.parentNode?.children;
+  if (brother) brother.splice(brother.indexOf(child), 1);
 }
 // 从根容器中移除某个子节点
-export function removeChildFromContainer(container, child) {
-  console.log('removeChildFromContainer', container, child);
-  // TODO 移除事件
-  child.eject();
-}
+export const removeChildFromContainer = removeChild;
 // 重新渲染文本
 export function resetTextContent(instance) {
   console.log('resetTextContent', instance);

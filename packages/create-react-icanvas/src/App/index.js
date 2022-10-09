@@ -1,19 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { Image } from '@icanvas/react-components';
-export default function App({ deploy }) {
+export default function App({ options }) {
   const [ state, setState ] = useState(0);
   useEffect(() => {
-    if (deploy > 0) {
-      const a = setInterval(() => {
-        setState((e) => e > 3 ? e : console.log('---------------- App2onChange' + deploy + ' ---------------') || e + 1);
-      }, deploy);
-      return () => clearInterval(a);
-    }
-  }, [ deploy ]);
+    const a = setInterval(() => {
+      setState((e) => e > 3 ? e : console.log('---------------- App ---------------') || e + 1);
+    }, 1000);
+    return () => clearInterval(a);
+  }, [ ]);
   console.log('__child', state);
   return (
-    <shape x={state * 100} y="2" width="100" height="200" fillStyle="red">
-      { state === 1 && <Image x="200" y="300" width="100" height="200" src="/favicon.ico" /> }
-    </shape>
+    <rect width={options.width} height={options.height} style={{ fillStyle: 'green' }} drawType="fill">
+      <rect x={state * 100} y="2" width="100" height="200">
+        <fill style={{ fillStyle: 'red' }} />
+        <clip>
+          <Image x="150" y="100" width="100" height="200" src="/favicon.ico" />
+          { state === 1 && <Image x="50" y="100" width="100" height="200" src="/favicon.ico" /> }
+          <Image x="350" y="50" width="100" height="200" src="/favicon.ico" />
+        </clip>
+      </rect>
+      <Image x="350" y="500" width="100" height="200" src="/favicon.ico" />
+    </rect>
   );
 }

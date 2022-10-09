@@ -4,7 +4,9 @@
   "private": true,
   "dependencies": {
     "react": "18.2.0",
-    "react-scripts": "5.0.1"
+    "react-scripts": "5.0.1",
+    "@icanvas/react-reconciler":"1.0.0-beta",
+    "@icanvas/react-components":"1.0.0-beta"
   },
   "scripts": {
     "start": "react-scripts start",
