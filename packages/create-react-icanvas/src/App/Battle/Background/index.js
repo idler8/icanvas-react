@@ -1,12 +1,24 @@
-import { useImage } from '@icanvas/react-hooks';
+import { useImage, useFrame } from '@icanvas/react-web-hooks';
 import useCanvasOptions from 'apiHooks/useCanvasOptions';
+import { useMemo, useState } from 'react';
 import bg from './bg.jpg';
-export default function Component({ children }) {
+function Textures({ source, children }) {
   const { width, height } = useCanvasOptions();
-  const source = useImage(bg);
+  const autoHeight = useMemo(() => width * (source.width / source.height), [ source, width ]);
+  const textures = useMemo(() => {
+    const length = Math.ceil(height / autoHeight) + 1;
+    return Array.apply(null, { length }).map((_, i) => height - autoHeight - i * autoHeight);
+  }, [ autoHeight, height ]);
+  const [ y, setY ] = useState(0);
+  useFrame(() => setY((y) => (y + 8) % autoHeight), [ 60, autoHeight ]);
   return (
-    <texture width={width} height={height} source={source}>
+    <>
+      { textures.map((e, i) => <texture key={i} y={e + y} width={width} height={autoHeight} source={source} />) }
       { children }
-    </texture>
+    </>
   );
+}
+export default function Component(props) {
+  const source = useImage(bg);
+  return source && <Textures source={source} {...props} />;
 }

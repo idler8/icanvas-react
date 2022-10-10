@@ -1,5 +1,5 @@
 {
-  "name": "@icanvas/react-hooks",
+  "name": "@icanvas/react-wxgame-hooks",
   "version": "1.0.0-beta",
   "main": "src/index.js",
   "author": "闲人 <code@idler8.com>",

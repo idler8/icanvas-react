@@ -1,4 +1,4 @@
-import { useImage } from '@icanvas/react-hooks';
+import { useImage } from '@icanvas/react-web-hooks';
 import useCanvasOptions from 'apiHooks/useCanvasOptions';
 import enemy from './enemy.png';
 export default function Component({ children }) {
