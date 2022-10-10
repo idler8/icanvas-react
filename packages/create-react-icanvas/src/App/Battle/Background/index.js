@@ -1,4 +1,4 @@
-import { useImage, useFrame } from '@icanvas/react-web-hooks';
+import { useImage, useFrame } from '@icanvas/react-hooks-web';
 import useCanvasOptions from 'apiHooks/useCanvasOptions';
 import { useMemo, useState } from 'react';
 import bg from './bg.jpg';

@@ -1,4 +1,4 @@
-import { useImage, useFrame } from '@icanvas/react-web-hooks';
+import { useImage, useFrame } from '@icanvas/react-hooks-web';
 import useCanvasOptions from 'apiHooks/useCanvasOptions';
 import { useState } from 'react';
 import explosion1 from './Resources/explosion1.png';
@@ -47,7 +47,7 @@ export default function Component({ children }) {
   useFrame(() => setTexture((texture) => textures[textures.indexOf(texture) + 1]), [ 25 ]);
   const source = useImage(texture);
   return (
-    <texture x={width / 2 - 50} y={50} width={100} height={100} source={source}>
+    <texture x={width / 2 - 50} y={50} width={100} height={100} source={source} name="boom">
       { children }
     </texture>
   );

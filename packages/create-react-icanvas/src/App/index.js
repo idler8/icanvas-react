@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Config } from 'apiHooks/useCanvasOptions';
-import { useResize, useCanvasSize, useSyncCanvasSize } from '@icanvas/react-web-hooks';
+import { useResize, useCanvasSize, useSyncCanvasSize } from '@icanvas/react-hooks-web';
 import Battle from './Battle';
 export default function App({ canvas }) {
   const [ width, setWidth ] = useState(window.innerWidth);

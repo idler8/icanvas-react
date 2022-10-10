@@ -1,4 +1,4 @@
-import { useImage } from '@icanvas/react-web-hooks';
+import { useImage } from '@icanvas/react-hooks-web';
 import useCanvasOptions from 'apiHooks/useCanvasOptions';
 import bullet from './bullet.png';
 export default function Component({ children }) {

@@ -1,4 +1,4 @@
-import { useImage } from '@icanvas/react-web-hooks';
+import { useImage } from '@icanvas/react-hooks-web';
 import player from './hero.png';
 
 export default function Component({ x, y, children }) {

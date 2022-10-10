@@ -10,7 +10,7 @@ function drawChildren(ctx) {
 }
 // eslint-disable-next-line no-unused-vars
 export default function createInstance(type, props, rootContainer, hostContext, internalHandle) {
-  console.log('createInstance');
+  console.log('createInstance', type, props);
   // TODO 设定监听
   return {
     type,
