@@ -1,16 +1,28 @@
-import { useEffect } from 'react';
-
-export default function useWebTouch(handler) {
+import { useEffect, useMemo } from 'react';
+function getListener() {
+  const events = { 'start': [], 'move': [], 'end': [], 'cancel': []};
+  const on = (type, event) => events[type].push(event);
+  const off = (type, event) => events[type].splice(events[type].indexOf(event), 1);
+  return { events, on, off };
+}
+export default function useWebTouch(canvas) {
+  const listener = useMemo(getListener, []);
   useEffect(() => {
-    document.body.addEventListener('touchstart', handler);
-    document.body.addEventListener('touchmove', handler);
-    document.body.addEventListener('touchend', handler);
-    document.body.addEventListener('touchcancel', handler);
-    return () => {
-      document.body.removeEventListener('touchstart', handler);
-      document.body.removeEventListener('touchmove', handler);
-      document.body.removeEventListener('touchend', handler);
-      document.body.removeEventListener('touchcancel', handler);
+    const removed = [];
+    const anyListener = (type, target) => {
+      const handler = (e) => {
+        const touch = e.touches[0];
+        const event = { type: e.type, clientX: touch.clientX, clientY: touch.clientY };
+        listener.events[target].forEach((func) => func(event));
+      };
+      removed.push({ type, handler });
+      canvas.addEventListener(type, handler);
     };
-  }, [ handler ]);
+    anyListener('touchstart', 'start');
+    anyListener('touchstart', 'start');
+    anyListener('touchstart', 'start');
+    anyListener('touchstart', 'start');
+    return () => removed.forEach(e => canvas.removeEventListener(e.type, e.handler));
+  }, [ listener ]);
+  return listener;
 }

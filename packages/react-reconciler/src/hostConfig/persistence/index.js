@@ -4,9 +4,6 @@ export function cloneInstance(instance, updatePayload, type, oldProps, newProps,
   instance.props = newProps;
   return instance;
 }
-export function appendInitialChild(parentInstance, child) {
-  console.log('appendIntialChild', parentInstance, child);
-}
 export function createContainerChildSet(container) {
   const canvas = document.createElement('canvas');
   canvas.width = container.canvas.width;
